@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: job_app_track_development
   pool: 5
-  username: job_app_track
+  username:
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: job_app_track_test
   pool: 5
-  username: job_app_track
+  username:
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: job_app_track_production
   pool: 5
-  username: job_app_track
+  username:
   password:
