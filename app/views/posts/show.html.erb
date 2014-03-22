@@ -5,8 +5,21 @@
     <div class="panel panel-default">
 
     <div class="panel-body">
-    <p><%= @post.title %></p>
-
+    <ul class="list-group">
+      <li class="list-group-item">Title: <%= @post.title %></li>
+      <li class="list-group-item">Employer: <%= @post.employer %></li>
+      <li class="list-group-item">Hours Per Week: <%= @post.hours_per_week %></li>
+      <li class="list-group-item">Location: <%= @post.location %></li>
+      <li class="list-group-item">Employment: <%= @post.employment %></li>
+      <li class="list-group-item">Job Posting URL:  <%= link_to "#{@post.job_posting_url[0..80]}", @post.job_posting_url  %></li>
+      <li class="list-group-item">Local URL: <%= @post.local_url %></li>
+      <li class="list-group-item">Employer Portal: <%= @post.employer_portal %></li>
+      <li class="list-group-item">Portal Login: <%= @post.portal_login %></li>
+      <li class="list-group-item">Date Applied: <%= @post.date_applied %></li>
+      <li class="list-group-item">Status: <%= @post.status %></li>
+      <li class="list-group-item">Referred By: <%= @post.referred_by %></li>
+      <li class="list-group-item">Reminder: <%= @post.reminder %></li>
+    <ul>
     <% if @post.user == current_user %>
       <%= link_to edit_post_path(@post) do %>
         <span class="glyphicon glyphicon-edit"></span>
