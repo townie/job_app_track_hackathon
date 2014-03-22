@@ -31,6 +31,12 @@ class PostsController < ApplicationController
   end
 
   def update
+    # source = params[:post][:job_posting_url]
+    # resp = Net::HTTP.get_response(URI.parse(source))
+    # data = resp.body
+    # data_fixed = data.force_encoding('iso8859-1').encode('utf-8')
+    # binding.pry
+    # @post.update_attributes website_content: data
     if @post.update(params[:post].permit!)
       redirect_to @post, notice: 'Post was successfully updated.'
     else
