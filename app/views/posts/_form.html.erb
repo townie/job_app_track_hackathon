@@ -1,0 +1,43 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :employer %>
+    <%= f.text_field :employer, class: "form-control" %>
+    <%= f.label :hours_per_week %>
+    <%= f.text_field :hours_per_week, class: "form-control" %>
+    <%= f.label :location %>
+    <%= f.text_field :location, class: "form-control" %>
+    <%= f.label :employment %>
+    <%= f.text_field :employment, class: "form-control" %>
+    <%= f.label :job_posting_url %>
+    <%= f.text_field :job_posting_url, class: "form-control" %>
+    <%= f.label :local_url %>
+    <%= f.text_field :local_url, class: "form-control" %>
+    <%= f.label :employer_portal %>
+    <%= f.text_field :employer_portal, class: "form-control" %>
+    <%= f.label :date_applied %>
+    <%= f.text_field :date_applied, class: "form-control" %>
+    <%= f.label :status %>
+    <%= f.text_field :status, class: "form-control" %>
+    <%= f.label :referred_by %>
+    <%= f.text_field :referred_by, class: "form-control" %>
+    <%= f.label :reminder %>
+    <%= f.text_field :reminder, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
