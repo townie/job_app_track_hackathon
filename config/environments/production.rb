@@ -79,5 +79,5 @@ JobAppTrack::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   #you'll need to change this to actual host address
-  config.action_mailer.default_url_options = { :host => 'http://pinteresting-commits.herokuapp.com/' }
+  config.action_mailer.default_url_options = { :host => 'http://pacific-sands-9267.herokuapp.com/' }
 end
