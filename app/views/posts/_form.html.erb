@@ -11,8 +11,8 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :title %>
+  <div class="form-group col-lg-6">
+    <%= f.label :title %>*
     <%= f.text_field :title, class: "form-control" %>
     <%= f.label :employer %>
     <%= f.text_field :employer, class: "form-control" %>
@@ -30,14 +30,13 @@
     <%= f.text_field :employer_portal, class: "form-control" %>
     <%= f.label :date_applied %>
     <%= f.text_field :date_applied, class: "form-control" %>
-    <%= f.label :status %>
+    <%= f.label :status %>*
     <%= f.text_field :status, class: "form-control" %>
     <%= f.label :referred_by %>
     <%= f.text_field :referred_by, class: "form-control" %>
     <%= f.label :reminder %>
     <%= f.text_field :reminder, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>
+    <%= link_to 'Back', posts_path, class: "btn btn-primary" %>
   </div>
 <% end %>
