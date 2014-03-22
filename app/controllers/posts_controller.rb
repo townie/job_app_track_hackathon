@@ -18,7 +18,11 @@ class PostsController < ApplicationController
   end
 
   def create
+    source = params[:post][:job_posting_url]
+    resp = Net::HTTP.get_response(URI.parse(source))
+    data = resp.body
     @post = current_user.posts.build(params[:post].permit!)
+    @post.update_attributes website_content: data
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else

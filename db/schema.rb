@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322172722) do
+ActiveRecord::Schema.define(version: 20140322202433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140322172722) do
     t.integer  "job_board_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "website_content"
   end
 
   add_index "posts", ["job_posting_url"], name: "index_posts_on_job_posting_url", unique: true, using: :btree
