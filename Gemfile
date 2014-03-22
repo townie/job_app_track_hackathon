@@ -38,6 +38,7 @@ group :development, :test do
 end
 
 gem 'bootstrap-sass'
+gem 'devise'
 
 
 # Use ActiveModel has_secure_password
