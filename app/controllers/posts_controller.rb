@@ -3,15 +3,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order("created_at DESC")
+    @posts = current_user.posts.order(created_at: :desc)
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def new
@@ -19,29 +17,27 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = current_user.posts.build(post_params)
     if params[:post][:job_posting_url] != ""
-      source = params[:post][:job_posting_url]
-      resp = Net::HTTP.get_response(URI.parse(source))
-      data = resp.body
-      @post = current_user.posts.build(params[:post].permit!)
+      data = @post.http_fetch(params[:post][:job_posting_url])
+      data = data.force_encoding('Windows-1252').encode('UTF-8')
       @post.update_attributes website_content: data
     end
-      if @post.save
-        redirect_to @post, notice: 'Post was successfully created.'
-      else
-        render action: 'new'
-      end
-
+    if @post.save
+      redirect_to @post, notice: 'Post was successfully created.'
+    else
+      render action: 'new'
+    end
   end
 
   def update
-    # source = params[:post][:job_posting_url]
-    # resp = Net::HTTP.get_response(URI.parse(source))
-    # data = resp.body
-    # data_fixed = data.force_encoding('iso8859-1').encode('utf-8')
-    # binding.pry
-    # @post.update_attributes website_content: data
-    if @post.update(params[:post].permit!)
+    @post = Post.find(params[:id])
+    if (@post.website_content != params[:website_content]) && params[:post][:job_posting_url] != ""
+      data = @post.http_fetch(params[:post][:job_posting_url])
+      data = data.force_encoding('Windows-1252').encode('UTF-8')
+      @post.update_attributes website_content: data
+    end
+    if @post.update(post_params)
       redirect_to @post, notice: 'Post was successfully updated.'
     else
       render action: 'edit'
@@ -61,7 +57,7 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title)
+    params.require(:post).permit(:title, :employer, :hours_per_week, :location, :employment, :job_posting_url, :local_url, :employer_portal, :date_applied, :status, :referred_by, :reminder)
   end
 
 end
