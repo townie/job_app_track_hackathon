@@ -20,7 +20,6 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if params[:post][:job_posting_url] != ""
       data = @post.http_fetch(params[:post][:job_posting_url])
-      data = data.force_encoding('Windows-1252').encode('UTF-8')
       @post.update_attributes website_content: data
     end
     if @post.save
