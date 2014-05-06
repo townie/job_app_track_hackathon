@@ -24,6 +24,9 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'rails_12factor', group: :production
 gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+gem 'thin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

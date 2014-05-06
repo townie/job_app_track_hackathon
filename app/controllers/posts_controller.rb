@@ -27,7 +27,6 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    end
     if @post.update(post_params)
       redirect_to @post, notice: 'Post was successfully updated.'
     else
