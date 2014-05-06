@@ -1,8 +1,10 @@
+require 'sidekiq/web'
 JobAppTrack::Application.routes.draw do
   devise_for :users
   root "pages#home"
   resources :posts
   resources :webcontent
+  mount Sidekiq::Web, at: '/sidekiq'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
