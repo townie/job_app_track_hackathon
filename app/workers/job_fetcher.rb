@@ -1,4 +1,5 @@
 require 'sidekiq/testing/inline'
+require 'net/http'
 class JobFetcher
   include Sidekiq::Worker
 
