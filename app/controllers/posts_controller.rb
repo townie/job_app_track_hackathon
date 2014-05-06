@@ -1,4 +1,3 @@
-require 'net/http'
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -18,11 +17,8 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if params[:post][:job_posting_url] != ""
-      data = @post.http_fetch(params[:post][:job_posting_url])
-      @post.update_attributes website_content: data
-    end
     if @post.save
+      JobFetcher.perform_async(@post.id)
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render action: 'new'
