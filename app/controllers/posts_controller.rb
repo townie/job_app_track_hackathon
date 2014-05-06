@@ -1,4 +1,3 @@
-require 'net/http'
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -18,11 +17,8 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if params[:post][:job_posting_url] != ""
-      data = @post.http_fetch(params[:post][:job_posting_url])
-      @post.update_attributes website_content: data
-    end
     if @post.save
+      JobFetcher.perform_async(@post.id)
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render action: 'new'
@@ -31,10 +27,6 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if (@post.website_content != params[:website_content]) && params[:post][:job_posting_url] != ""
-      data = @post.http_fetch(params[:post][:job_posting_url])
-      data = data.force_encoding('Windows-1252').encode('UTF-8')
-      @post.update_attributes website_content: data
     end
     if @post.update(post_params)
       redirect_to @post, notice: 'Post was successfully updated.'
